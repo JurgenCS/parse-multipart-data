@@ -3,11 +3,12 @@
   "version": "0.0.0-development",
   "description":
     "A javascript/nodejs multipart/form-data parser which operates on raw data.",
-  "main": "dist/multipart.js",
+  "main": "./lib/multipart.js",
   "author": "Ignacio Mazzara (nachomazzara@gmail.com)",
   "license": "MIT",
   "scripts": {
     "prebuild": "rm -rf dist",
+	"start": "ts-node ./src/multipart.ts",
     "build": "tsc --project tsconfig.json",
     "test": "nyc mocha --require ts-node/register test/*.spec.ts",
     "semantic-release": "semantic-release"
