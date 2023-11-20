@@ -159,41 +159,41 @@ function process(part: Part): Input {
   // part: 'AAAABBBB' }
   // into this one:
   // { filename: 'A.txt', type: 'text/plain', data: <Buffer 41 41 41 41 42 42 42 42> }
-  const obj = function (str: string) {
-    const k = str.split('=')
-    const a = k[0].trim()
+//   const obj = function (str: string) {
+//     const k = str.split('=')
+//     const a = k[0].trim()
 
-    const b = JSON.parse(k[1].trim())
-    const o = {}
-    Object.defineProperty(o, a, {
-      value: b,
-      writable: true,
-      enumerable: true,
-      configurable: true
-    })
-    return o
-  }
-  const header = part.contentDispositionHeader.split(';')
+//     const b = JSON.parse(k[1].trim())
+//     const o = {}
+//     Object.defineProperty(o, a, {
+//       value: b,
+//       writable: true,
+//       enumerable: true,
+//       configurable: true
+//     })
+//     return o
+//   }
+//   const header = part.contentDispositionHeader.split(';')
 
-  const filenameData = header[2]
+//   const filenameData = header[2]
   let input = {}
-  if (filenameData) {
-    input = obj(filenameData)
-    const contentType = part.contentTypeHeader.split(':')[1].trim()
-    Object.defineProperty(input, 'type', {
-      value: contentType,
-      writable: true,
-      enumerable: true,
-      configurable: true
-    })
-  }
-  // always process the name field
-  Object.defineProperty(input, 'name', {
-    value: header[1].split('=')[1].replace(/"/g, ''),
-    writable: true,
-    enumerable: true,
-    configurable: true
-  })
+//   if (filenameData) {
+//     input = obj(filenameData)
+//     const contentType = part.contentTypeHeader.split(':')[1].trim()
+//     Object.defineProperty(input, 'type', {
+//       value: contentType,
+//       writable: true,
+//       enumerable: true,
+//       configurable: true
+//     })
+//   }
+//   // always process the name field
+//   Object.defineProperty(input, 'name', {
+//     value: header[1].split('=')[1].replace(/"/g, ''),
+//     writable: true,
+//     enumerable: true,
+//     configurable: true
+//   })
 
   Object.defineProperty(input, 'data', {
     value: Buffer.from(part.part),
